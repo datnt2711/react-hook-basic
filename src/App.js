@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
 import "./App.scss";
 import Nav from "./views/Nav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Todo from "./views/Todo";
+import Covid from "./views/Covid";
 
 function App() {
   const [name, setName] = useState("Dat eiii");
@@ -32,13 +33,24 @@ function App() {
     setAddress(event.target.value);
   };
 
+  const deleteDataTodo = (id) => {
+    let currentTodo = todos;
+    currentTodo = currentTodo.filter((item) => item.id !== id);
+    setTodos(currentTodo);
+  };
+
+  useEffect(() => {
+    console.log("using Effect");
+  }, []);
+
   return (
     <div className="App">
       <Nav />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h3>Hello world React Hook with {name}</h3>
-        <input
+        <Covid />
+        {/* <input
           type="text"
           value={address}
           onChange={(event) => handleOnchangeInput(event)}
@@ -48,20 +60,26 @@ function App() {
         </button>
 
         <div className="container">
-          <Todo todos={todos} title="All todos" />
+          <Todo
+            todos={todos}
+            title="All todos"
+            deleteDataTodo={deleteDataTodo}
+          />
         </div>
         <div>
           <Todo
             todos={todos.filter((item) => item.type === "film")}
             title="Film todos"
+            deleteDataTodo={deleteDataTodo}
           />
         </div>
         <div>
           <Todo
             todos={todos.filter((item) => item.type === "game")}
             title="Game todos"
+            deleteDataTodo={deleteDataTodo}
           />
-        </div>
+        </div> */}
       </header>
     </div>
   );
